@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+ <!-- 修改访问连接的后缀名 -->
+ <constant name="Struts.action.extension" value="action"></constant>
+ <!-- 设置开发模式，开发时输出更多的错误信息 -->
+ <constant name="struts.devMode" value="true"></constant>
+ <!--修改UI主题为简单主题 -->
+ <constant name="struts.ui.theme" value="simple"></constant>
+ <package name="system"   extends="struts-default">
+   
+   <!-- 首页的登录 -->
+   <action name="LoginAction_*" class="loginAction" method="{1}">
+    <result name="login">WEB-INF/page/menu/home.jsp</result>
+   <result name="top">WEB-INF/page/menu/top.jsp</result>
+   <result name="left">WEB-INF/page/menu/left.jsp</result>
+   <result name="loading">WEB-INF/page/menu/loading.jsp</result>
+   <result name="change">WEB-INF/page/menu/change.jsp</result>
+   
+   <result name="alermXZ">WEB-INF/page/menu/alermXZ.jsp</result>
+   <result name="alermJX">WEB-INF/page/menu/alermJX.jsp</result>
+   <result name="alermZD">WEB-INF/page/menu/alermZD.jsp</result>
+   <result name="alermSB">WEB-INF/page/menu/alermSB.jsp</result>
+   <result name="alermYS">WEB-INF/page/menu/alermYS.jsp</result>
+   
+   </action>
+ 
+ 
+   <action name="testsAction_*" class="testsAction" method="{1}">
+   <result name="success">/system/textAdd.jsp</result>
+   </action>
+    
+ 
+ </package>
+ 
+ 
+ 
+</struts>    

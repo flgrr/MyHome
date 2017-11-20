@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 映射文件的规范 -->
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ <!-- 映射 --> 
+  
+  <hibernate-mapping>
+ <!-- 持久化对象对数据表的映射所以是class  class的name表示的是持久化对象 (全路径) table是对应的表.所有属性必须放在class中-->
+  <class name="com.msys.domain.Tests" table="tests">
+  <!-- id是持久化对象的主键 name主键的名字，是持久化对象的属性。 column是主键对应的表的列 ,声明的是sql的类型-->
+  <id name="textID" type="java.lang.Integer">
+  <column name="textID" sql-type="varchar(50)"></column>
+  <generator class="native"></generator>
+  
+  </id>
+  <property name="textName" type="string">
+  <column name="textName" sql-type="varchar(50)"></column>
+  </property>
+  
+  <property name="textDate" type="date">
+  <column name="textDate" length="50"></column>
+  </property>
+   <property name="textRemark" type="string">
+  <column name="textRemark" sql-type="varchar(500)"></column>
+  </property>
+  </class>
+  </hibernate-mapping>
+    
+    

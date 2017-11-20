@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"  
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	                   
+	                   http://www.springframework.org/schema/context
+	                   http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	                    http://www.springframework.org/schema/tx
+	                     http://www.springframework.org/schema/tx/spring-tx.xsd ">
+
+<!-- Spring 托管Hibernate -->
+	<!--  <bean id="dataSource"   class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"  value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/msys"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="dlb"></property>
+	</bean>
+	
+	
+	<bean id="sessionFactory"   class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			</props>
+		</property>
+	</bean>-->
+	
+	<!-- 1. 注解的自动扫描，表示组件（如：@controler,@Service,@Repository,@Resource等）的扫描-->
+	<context:component-scan base-package="com.msys"/> 
+	<context:annotation-config></context:annotation-config>
+	<!-- 2.? -->
+	
+	<!-- 3.创建spring提供的sessionFactory，这是spring整合hibernate的核心    。
+	SessionFactory接口负责初始化Hibernate。它充当数据存储源的代理，并负责创建Session对象-->
+	<bean id="sessionFactory"   class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	<property name="configLocation"> 
+	<value>
+	 classpath:hibernate.cfg.xml
+	</value>
+	</property>
+	<property name="mappingResources">
+		<list>
+			<value>com/msys/table/YhxxTable.hbm.xml</value>
+			<value>com/msys/table/GlryxxTable.hbm.xml</value>
+			<value>com/msys/table/YwryxxTable.hbm.xml</value>
+			<value>com/msys/table/YhbxxxTable.hbm.xml</value>
+			<value>com/msys/table/RqbgzxxTable.hbm.xml</value>
+			<value>com/msys/table/YhssTable.hbm.xml</value>
+			<value>com/msys/table/TsfbxxTable.hbm.xml</value>
+			<value>com/msys/table/YhlxTable.hbm.xml</value>
+			<value>com/msys/table/YywdxxTable.hbm.xml</value></list>
+	</property></bean>
+	
+	
+	
+	
+	<!-- 4.创建事务管理器，由spring负责创建 -->
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!--  <tx:advice>
+		<tx:attributes>
+			<tx:method name=""></tx:method>
+		</tx:attributes>
+	
+	</tx:advice>-->
+	<!-- 5.使用注解的形式管理事务 -->
+	<tx:annotation-driven transaction-manager="txManager"/>
+	
+	
+	</beans>
